@@ -1,7 +1,11 @@
 package com.example.portapay;
 
+import com.google.android.gms.maps.MapFragment;
+
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.View;
@@ -17,13 +21,12 @@ public class PortaPayMain extends Activity {
         setContentView(R.layout.activity_porta_pay_main);
         this.ppMain = this;  
 		
-        final Button button = (Button) findViewById(R.id.btn_launchMap);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent mapDrawIntent = new Intent (ppMain, MapActivity.class) ;
-                startActivity(mapDrawIntent);
-            }
-        });
+        MapFragment mMapFragment = MapFragment.newInstance();
+        FragmentTransaction fragmentTransaction =
+                getFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.map_container, mMapFragment);
+        fragmentTransaction.commit();
+        
     }
 
 
